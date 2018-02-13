@@ -1,15 +1,14 @@
 # **Traffic Sign Recognition** 
 
-## Writeup
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+## James DiDonato
+## February 2018
 
 ---
 
 **Build a Traffic Sign Recognition Project**
 
 The goals / steps of this project are the following:
-* Load the data set (see below for links to the project data set)
+* Load the data set 
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
@@ -19,43 +18,73 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image1]: ./ReportPics/15TrafficSigns.png "Visualization"
+[image2]: ./ReportPics/TrainingSetHist.png "Training Set Histogram"
+[image3]: ./ReportPics/ValidationSetHist.png "Validation Set Histogram"
+[image4]: ./ReportPics/TestSetHist.png "Test Set Histogram"
 
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+
+**Project Rubric : [Rubric Points](https://review.udacity.com/#!/rubrics/481/view)**
+
 
 ---
-### Writeup / README
+### Project Writeup
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+You're reading it! and here is a link to my [project code](https://github.com/JamesDiDonato/CarND-P2/blob/master/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
 #### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-I used the pandas library to calculate summary statistics of the traffic
-signs data set:
+The default training, validation, and test sets are imported from their respective .pickle files. Each image is size 32x32x3 and represents 1 of a possible 43 image classifications.  The size of each data set is summarized below: 
 
-* The size of training set is ?
-* The size of the validation set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+|Data Set|Size|Relative Size|
+|---|---|---|
+|Training Set|34799|67%|
+|Validation Set|4410|8.5%|
+|Test Set|12630|24.5%|
+
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+First, 15 random images are displayed from the training set
 
-![alt text][image1]
+![Image Sampling][image1]
+
+An observation of the images :different contrast levels, brightness, and physical sign size, some noise factors network will need to be robust to.
+
+Histograms are plotted and analyzed for each of the three data sets:
+
+![Training Set Histogram][image2]
+![Validation Set Histogram][image3]
+![Test Set Histogram][image4]
+
+The distribution for each of the sets follows a similar pattern, implying that the three were generated from a randomized master dataset . While I have never been to Germany, I can observe that the following signs are not very common : 
+|Sign|ID|
+|---|---|
+|20 km/h|1|
+|100 km/h|7|
+|Dangerous Curve to the Right|20|
+|Pedestrians|27|
+|Turn Right Ahead|33|
+|Keep Right|38|
+
+
+ While the following are more popular : 
+|Sign|ID|
+|---|---|
+|50 km/h|2|
+|60 km/h|3|
+|80 km/h|5|
+|End of Speed Limit 80 km/h|6|
+|Right-of-way at Next Intersection|11|
+|Yield|13|
+|Stop|14|
+|Keep left|39|
+
+To challenge the robustness of the developed model, it shall be evaluated with signs that appear less frequently in the data set.
 
 ### Design and Test a Model Architecture
 
