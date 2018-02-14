@@ -62,51 +62,46 @@ Histograms are plotted and analyzed for each of the three data sets:
 ![Test Set Histogram][image4]
 
 The distribution for each of the sets follows a similar pattern, implying that the three were generated from a randomized master dataset . While I have never been to Germany, I can observe that the following signs are not very common : 
+
 |Sign|ID|
 |---|---|
-|20 km/h|1|
-|100 km/h|7|
-|Dangerous Curve to the Right|20|
+|20 km/h|0|
+|End of Speed Limit 80 km/h |6|
+|Dangerous Curve to the Left|19|
+|Dangerous Curve to the Right |20|
+|Double Curve |21|
+|Road Narrows on the Right|24|
 |Pedestrians|27|
-|Turn Right Ahead|33|
-|Keep Right|38|
+|End of all Speed and Passing Limits|32|
+|Go Straight or Left|37|
+|End of No Passing|41|
 
 
  While the following are more popular : 
+
 |Sign|ID|
 |---|---|
-|50 km/h|2|
-|60 km/h|3|
-|80 km/h|5|
-|End of Speed Limit 80 km/h|6|
-|Right-of-way at Next Intersection|11|
+|Speed limit (30km/h)|1|
+|Speed limit (50km/h)|2|
+|Speed limit (70km/h)|4|
+|Speed limit (80km/h)|5|
+|No passing for vehicles over 3.5 metric tons|10|
+|Priority road|12|
 |Yield|13|
-|Stop|14|
-|Keep left|39|
+|Keep Right|38|
 
-To challenge the robustness of the developed model, it shall be evaluated with signs that appear less frequently in the data set.
+In theory, the worst case accuracy of the model would be on the signs that appear less frequently in the data set. Augmenting the data set with additional images will be explored as a technique to improve the models accuracy.
 
 ### Design and Test a Model Architecture
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because ...
+An untouched LeNet model was initially tested without any pre-processing to establish a baseline accuracy. Model parameters were also default (EPOCHS = 10, BATCH_SIZE = 128, RATE = 0.001, SIGMA = 0.1, MU = 0). The accuracy on the validation was 86.9%. Ok, now we have a baseline to work from. The model will be tested in an iterative process as design changes are made to both pre-processing and architecture, in order to validate their effects.
 
-Here is an example of a traffic sign image before and after grayscaling.
-
-![alt text][image2]
-
-As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
+Pre-processing steps:
+* Images are converted to gray scale. It was noticed that the training time is significantly shorter due to shrinking the input depth from (R,G,B) to (Gray) with a GTX 960 GPU being used. Validation set accuracy improves to 91.12%. Color is not a useful feature for identifying the traffic signs and loosens the structure.
+* The data sets are normalized to [-1,1] by applying the following formula to each pixel : normalized_pixel =(pixel - 128)/128 . The average of each dataset is roughly -0.35. Normalziation was performed so that features in the image are considered with equally by the network, leading to faster convergence of the network weights with less oscillations around minima. Validation set accuracy still sits at 91.18%.  	
+* At this point, the training set accuracy is roughly 99% while the validation set is only 90%, and so I decided to generate additional data in order to improve the accuracy of the validation set . As illustrated above, there are certain images in the training dataset that are not very common and without sufficient data to  train on, this could lead to the model not being able to sufficiently learn the features to properly classify these images on fresh images it has not seen before. The goal will be to add images to each bin in the training data until the quantity reaches the average, 809.
 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.

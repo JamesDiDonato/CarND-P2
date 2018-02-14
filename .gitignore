@@ -5,3 +5,4 @@ traffic-signs-data/
 .ipynb_checkpoints/
 signnames.csv
 checkpoint
+*.ods
