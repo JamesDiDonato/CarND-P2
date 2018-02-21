@@ -120,6 +120,7 @@ A random sample of 15 pre-processed images is shown:
 
 My final model consisted of the following layers:
 
+
 |Layer|Output Size|Description|
 |---|---|
 |Input|32x32x1|
@@ -134,6 +135,7 @@ My final model consisted of the following layers:
 |Fully Connected Layer 1|1x100|
 |Relu Activation|1x100|
 |Fully Connected Layer 2|1x43|
+
 
 The architecture consists of a 3-stage convolutional layer feeding a 2-stage fully connected layer. Each layer output is activated using the non-linear relu function. The design also features multi-stage approach where the output of the 2nd convolutional layer is concatenated with the output of the 3rd to feed the fully connected layer. By implemeting the multi-stage approach, the model was able to learn both local as well as high level features of the image. 
 
@@ -189,8 +191,9 @@ The model was able to accurately predict 75% of the images ( 6/8 ). This is lowe
 
 The image class ID's are compared with their predictions:
 
+
 |Image|Predition|
-|---|---|---|
+| --- | --- | --- |
 |25|25|
 |33|33|
 |0|0|
@@ -198,6 +201,7 @@ The image class ID's are compared with their predictions:
 |40|41|
 |12|12|
 |29|14|
+
 
 The two images that were incorrectly classified were 40 - Roundabout Mandatory , and 29 - Bicycle Crossing. Both of these images were not well represented in the training set with counts of ~250,. A reccomendation for future work would be to augment these two class ID's with more data and then re-run this test. My hypothesis is that the model would predict these classes accurately if the data sets were increased to at least 800 images.
 
