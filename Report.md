@@ -121,7 +121,7 @@ A random sample of 15 pre-processed images is shown:
 My final model consisted of the following layers:
 
 
-|Layer|Output Size|Description|
+|Layer|Output Size|
 |---|---|
 |Input|32x32x1|
 |Convolution 1|28x28x6|
@@ -193,7 +193,7 @@ The image class ID's are compared with their predictions:
 
 
 |Image|Predition|
-| --- | --- | --- |
+| --- | --- |
 |25|25|
 |33|33|
 |0|0|
