@@ -1,6 +1,6 @@
 # **Lane Line Detection Pipeline** 
 
-### Completed for Udacity Self Driving Car Engineer on 2018/02
+### Completed for Udacity Self Driving Car Engineer - 2018/02
 
 ---
 
